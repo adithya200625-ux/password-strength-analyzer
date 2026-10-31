@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8f7">
+  <meta name="description" content="A private, browser-based password strength checker and secure password generator.">
+  <title>Passwise — Password Strength Analyzer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Passwise home"><span class="brand-mark" aria-hidden="true">P</span><span>passwise<span class="brand-dot">.</span></span></a>
+      <span class="local-badge"><span class="status-dot"></span> 100% local & private</span>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="eyebrow"><span class="sparkle">✳</span> YOUR PASSWORD, DECODED</div>
+        <h1 id="page-title">Make your next password<br><span>your strongest yet.</span></h1>
+        <p class="hero-copy">Check the strength of a password and get practical ways to improve it.<br class="desktop-break"> Your password stays right here in your browser.</p>
+      </section>
+
+      <section class="analyzer card" aria-label="Password analyzer">
+        <div class="section-heading"><div><span class="step-label">01 / ANALYZE</span><h2>Test a password</h2></div><span class="shield-icon" aria-hidden="true">⌑</span></div>
+        <label class="field-label" for="password">ENTER PASSWORD</label>
+        <div class="password-field">
+          <input id="password" type="password" autocomplete="new-password" spellcheck="false" placeholder="Type a password to check its strength" aria-describedby="privacy-note">
+          <button class="icon-button" id="toggle-visibility" type="button" aria-label="Show password" title="Show password"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.4-6.3 9.5-6.3 9.5 6.3 9.5 6.3-3.4 6.3-9.5 6.3S2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.7"/></svg></button>
+          <button class="icon-button clear-button" id="clear-password" type="button" aria-label="Clear password" title="Clear password"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+        </div>
+        <div class="meter-row"><div class="meter" aria-label="Password strength"><span id="meter-fill"></span></div><span id="strength-label" class="strength-label">—</span></div>
+        <p id="privacy-note" class="privacy-note"><span aria-hidden="true">♧</span> Your password is analyzed on this device and is never saved or sent anywhere.</p>
+
+        <div class="results-grid">
+          <div class="score-panel"><span class="field-label">STRENGTH SCORE</span><div class="score-line"><strong id="score-value">—</strong><span>/ 100</span></div><p id="score-caption">Start typing to see your score.</p><div class="score-track"><span id="score-fill"></span></div></div>
+          <div class="checks-panel"><span class="field-label">SECURITY CHECKLIST</span><ul class="checks-list" id="checks-list">
+            <li data-check="length"><span class="check-icon">○</span><span>At least 12 characters</span></li>
+            <li data-check="variety"><span class="check-icon">○</span><span>Mix of character types</span></li>
+            <li data-check="unique"><span class="check-icon">○</span><span>No obvious repeats</span></li>
+            <li data-check="common"><span class="check-icon">○</span><span>Avoids common passwords</span></li>
+          </ul></div>
+        </div>
+        <div id="feedback" class="feedback" aria-live="polite" hidden></div>
+      </section>
+
+      <section class="generator card" aria-labelledby="generator-title">
+        <div class="section-heading"><div><span class="step-label">02 / IMPROVE</span><h2 id="generator-title">Need a stronger one?</h2></div><span class="wand-icon" aria-hidden="true">✳</span></div>
+        <p class="generator-copy">Generate a random password using your browser’s secure random number generator.</p>
+        <div class="generator-controls">
+          <label for="length-range">LENGTH <output id="length-value" for="length-range">20</output></label>
+          <input id="length-range" type="range" min="12" max="32" value="20">
+          <label class="option"><input type="checkbox" id="include-symbols" checked><span class="custom-check"></span> Include symbols</label>
+          <button id="generate-button" class="primary-button" type="button"><span aria-hidden="true">✳</span> Generate password</button>
+        </div>
+        <div id="suggestion-wrap" class="suggestion-wrap" hidden>
+          <label class="field-label" for="suggestion">YOUR NEW PASSWORD</label>
+          <div class="suggestion-box"><code id="suggestion"></code><button id="copy-button" class="copy-button" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg><span>Copy</span></button></div>
+          <p id="copy-status" class="copy-status" aria-live="polite"></p>
+        </div>
+        <div id="tip-box" class="tip-box"><span class="tip-icon" aria-hidden="true">✦</span><p><strong>A good rule of thumb</strong><br>Longer is stronger. Try a unique passphrase with 4 or more unrelated words, or generate a random password and save it in a password manager.</p></div>
+      </section>
+
+      <section class="learn-section" aria-label="How scoring works"><div class="learn-heading"><span class="step-label">A LITTLE PASSWORD KNOW-HOW</span><span class="learn-rule"></span></div><div class="learn-cards"><article><span class="learn-number">01</span><h3>Length beats complexity</h3><p>Long passwords take far longer to guess. Aim for at least 12 characters; 16 or more is even better.</p></article><article><span class="learn-number">02</span><h3>Make every one unique</h3><p>Reusing passwords means one data breach can put multiple accounts at risk. A password manager can help.</p></article><article><span class="learn-number">03</span><h3>Entropy, in a nutshell</h3><p>Entropy estimates how unpredictable a password is. Randomness and length both make guessing harder.</p></article></div></section>
+    </main>
+    <footer><span>Passwise <span class="brand-dot">·</span> A small tool for better password habits.</span><span class="footer-lock">⌑ &nbsp;No password leaves your device</span></footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
