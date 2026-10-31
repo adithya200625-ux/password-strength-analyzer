@@ -19,7 +19,7 @@ const copyStatus = document.querySelector('#copy-status');
 const commonPasswords = new Set([
   'password', 'password1', '123456', '123456789', '12345678', 'qwerty', 'qwerty123',
   'abc123', '111111', 'iloveyou', 'admin', 'letmein', 'welcome', 'monkey', 'dragon',
-  'football', 'baseball', ' sunshine', 'passw0rd', 'p@ssw0rd', 'admin123'
+  'football', 'baseball', 'sunshine', 'passw0rd', 'p@ssw0rd', 'admin123'
 ]);
 const sequences = ['abcdefghijklmnopqrstuvwxyz', '0123456789', 'qwertyuiop', 'asdfghjkl', 'zxcvbnm'];
 
@@ -136,3 +136,5 @@ copyButton.addEventListener('click', async () => {
 });
 
 render();
+
+
